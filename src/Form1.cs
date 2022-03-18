@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
 using Microsoft.Msagl.Drawing;
+using System.Diagnostics;
 
 namespace DiggingDeep
 {
@@ -90,9 +91,30 @@ namespace DiggingDeep
             panelTree.ResumeLayout();
         }
 
+        public void ResetNodeColor()
+        {
+            foreach(var node in graph.Nodes)
+            {
+                node.Attr.FillColor = Microsoft.Msagl.Drawing.Color.White;
+            }
+        }
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            // measure execution time
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            ResetNodeColor();
+            Controls.Add(linkPath);
+            linkPath.Links.Clear();
             string fileName = inputFileName.Text;
+
+            // BFS
+            if (radBtnBFS.Checked)
+            {
+
+            }
 
             // DFS
             if (radBtnDFS.Checked)
@@ -101,8 +123,7 @@ namespace DiggingDeep
                 HashSet<string> res = treeDFS.Search_DFS(fileName, checkBox_all.Checked);
                 if (res.Count > 0)
                 {
-                    Controls.Add(linkPath);
-                    linkPath.Links.Clear();
+                    
                     var stringBuilder = new StringBuilder();
                     foreach(string path in res)
                     {
@@ -111,8 +132,26 @@ namespace DiggingDeep
                     }
                     linkPath.Text = stringBuilder.ToString();
                 }
+                else
+                {
+                    linkPath.Text = "Tidak ada path yang sesuai";
+                }
             }
+
+            stopwatch.Stop();
+            Controls.Add(labelTime);
+            labelTime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
             
+        }
+
+        private void linkPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (e.Link.LinkData.ToString() != "")
+            {
+                string pathToFile = Path.GetDirectoryName(e.Link.LinkData.ToString());
+
+                Process.Start("explorer.exe", pathToFile);
+            }
         }
     }
 }

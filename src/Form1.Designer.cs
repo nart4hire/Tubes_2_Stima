@@ -41,6 +41,8 @@
             this.radBtnDFS = new System.Windows.Forms.RadioButton();
             this.checkBox_all = new System.Windows.Forms.CheckBox();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.labelTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_openFolder
@@ -83,10 +85,9 @@
             this.linkPath.AutoSize = true;
             this.linkPath.Location = new System.Drawing.Point(533, 415);
             this.linkPath.Name = "linkPath";
-            this.linkPath.Size = new System.Drawing.Size(54, 16);
+            this.linkPath.Size = new System.Drawing.Size(0, 16);
             this.linkPath.TabIndex = 4;
-            this.linkPath.TabStop = true;
-            this.linkPath.Text = "linkPath";
+            this.linkPath.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPath_LinkClicked);
             // 
             // label3
             // 
@@ -155,9 +156,28 @@
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(163, 399);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 16);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Time Spent:";
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Location = new System.Drawing.Point(166, 419);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(0, 16);
+            this.labelTime.TabIndex = 13;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1354, 469);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.checkBox_all);
             this.Controls.Add(this.radBtnDFS);
@@ -192,6 +212,8 @@
         private System.Windows.Forms.RadioButton radBtnDFS;
         private System.Windows.Forms.CheckBox checkBox_all;
         private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelTime;
     }
 }
 

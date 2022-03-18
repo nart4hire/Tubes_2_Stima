@@ -7,8 +7,6 @@ using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.GraphViewerGdi;
 
-// todo: path all occurence masih salah
-
 namespace DiggingDeep
 {
     internal class DFS
@@ -77,6 +75,7 @@ namespace DiggingDeep
                                 if (AllOccurence)
                                 {
                                     found = false;
+                                    path.Remove(path.Last());
                                 }
                                 else
                                 {
