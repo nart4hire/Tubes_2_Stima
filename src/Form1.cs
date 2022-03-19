@@ -109,33 +109,36 @@ namespace DiggingDeep
             Controls.Add(linkPath);
             linkPath.Links.Clear();
             string fileName = inputFileName.Text;
+            HashSet<string> res = new HashSet<string>();
 
             // BFS
             if (radBtnBFS.Checked)
             {
-
+                BFS bfs = new BFS(root, graph);
+                res = bfs.Search(fileName, checkBox_all.Checked);
             }
 
             // DFS
-            if (radBtnDFS.Checked)
+            else if (radBtnDFS.Checked)
             {
                 DFS treeDFS = new DFS(this.root, panelTree, graph, viewer);
-                HashSet<string> res = treeDFS.Search_DFS(fileName, checkBox_all.Checked);
-                if (res.Count > 0)
+                res = treeDFS.Search_DFS(fileName, checkBox_all.Checked);
+            }
+
+            if (res.Count > 0)
+            {
+
+                var stringBuilder = new StringBuilder();
+                foreach (string path in res)
                 {
-                    
-                    var stringBuilder = new StringBuilder();
-                    foreach(string path in res)
-                    {
-                        linkPath.Links.Add(new LinkLabel.Link(stringBuilder.Length, path.Length, path));
-                        stringBuilder.Append(path + "\n");
-                    }
-                    linkPath.Text = stringBuilder.ToString();
+                    linkPath.Links.Add(new LinkLabel.Link(stringBuilder.Length, path.Length, path));
+                    stringBuilder.Append(path + "\n");
                 }
-                else
-                {
-                    linkPath.Text = "Tidak ada path yang sesuai";
-                }
+                linkPath.Text = stringBuilder.ToString();
+            }
+            else
+            {
+                linkPath.Text = "Tidak ada path yang sesuai";
             }
 
             stopwatch.Stop();
