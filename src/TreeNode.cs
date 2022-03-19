@@ -9,9 +9,11 @@ namespace DiggingDeep
     internal class TreeNode
     {
 		private readonly string name;
+		public string Id { get; }
 		// constructor
-		public TreeNode(string name)
+		public TreeNode(string id, string name)
 		{
+			Id = id;
 			this.name = name;
 			Children = new List<TreeNode>();
 		}
@@ -23,11 +25,15 @@ namespace DiggingDeep
 		public List<TreeNode> Children
 		{ get; set; } = null;
 
-		public TreeNode AddChild(string name)
+		public TreeNode AddChild(string id, string name)
 		{
-			var node = new TreeNode(name);
+			var node = new TreeNode(id, name);
 			Children.Add(node);
 			return node;
 		}
-	}
+        public override string ToString()
+        {
+            return name;
+        }
+    }
 }

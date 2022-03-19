@@ -60,16 +60,16 @@ namespace DiggingDeep
                         {
                             visited.Add(child);
                             path.Add(child);
-                            this.graph.FindNode(child.Name).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+                            this.graph.FindNode(child.Id).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
                             Search_DFS_rec(FileName, AllOccurence, ref result, ref path, ref visited, ref found);
                             if (found)
                             {
                                 string pathFound = path.First().Name;
-                                this.graph.FindNode(path.First().Name).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Blue;
+                                this.graph.FindNode(path.First().Id).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Blue;
                                 for (int i = 1; i < path.Count; i++)
                                 {
                                     pathFound += @"\" + path[i].Name;
-                                    this.graph.FindNode(path[i].Name).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Blue;
+                                    this.graph.FindNode(path[i].Id).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Blue;
                                 }
                                 result.Add(pathFound);
                                 if (AllOccurence)

@@ -36,7 +36,7 @@ namespace DiggingDeep
                 string selected = dialog.SelectedPath;
                 if (Directory.Exists(selected))
                 {
-                    root = new TreeNode(selected);
+                    root = new TreeNode(selected, selected);
                     IterateDirectory(selected, root, true);
                 }
                 DrawTree();
@@ -52,30 +52,20 @@ namespace DiggingDeep
                 if (File.Exists(file))
                 {
                     string filename = Path.GetFileName(file);
-                    TreeNode child_file = node.AddChild(filename);
-                    if (root)
-                    {
-                        graph.AddEdge(path, filename);
-                    }
-                    else
-                    {
-                        graph.AddEdge(pathname, filename);
-                    }
+                    TreeNode child_file = node.AddChild(file, filename);
+                    Node graphNode = graph.AddNode(file);
+                    graph.AddEdge(path, file);
+                    graphNode.LabelText = filename;
                 }
             }
             string[] dirs = Directory.GetDirectories(path);
             foreach(string dir in dirs)
             {
                 string dirname = Path.GetFileName(dir);
-                TreeNode child_subdir = node.AddChild(dirname);
-                if (root)
-                {
-                    graph.AddEdge(path, dirname);
-                }
-                else
-                {
-                    graph.AddEdge(pathname, dirname);
-                }
+                TreeNode child_subdir = node.AddChild(dir, dirname);
+                Node graphNode = graph.AddNode(dir);
+                graph.AddEdge(path, dir);
+                graphNode.LabelText = dirname;
                 IterateDirectory(dir, child_subdir, false);
             }
         }
@@ -144,7 +134,7 @@ namespace DiggingDeep
             stopwatch.Stop();
             Controls.Add(labelTime);
             labelTime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
-            
+            DrawTree();
         }
 
         private void linkPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
