@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Drawing.Drawing2D;
 using Microsoft.Msagl.Drawing;
 using System.Diagnostics;
 
@@ -81,11 +80,15 @@ namespace DiggingDeep
             panelTree.ResumeLayout();
         }
 
-        public void ResetNodeColor()
+        public void ResetGraphColor()
         {
             foreach(var node in graph.Nodes)
             {
                 node.Attr.FillColor = Microsoft.Msagl.Drawing.Color.White;
+            }
+            foreach(var edge in graph.Edges)
+            {
+                edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Black;
             }
         }
 
@@ -95,7 +98,7 @@ namespace DiggingDeep
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            ResetNodeColor();
+            ResetGraphColor();
             Controls.Add(linkPath);
             linkPath.Links.Clear();
             string fileName = inputFileName.Text;
@@ -111,7 +114,7 @@ namespace DiggingDeep
             // DFS
             else if (radBtnDFS.Checked)
             {
-                DFS treeDFS = new DFS(this.root, panelTree, graph, viewer);
+                DFS treeDFS = new DFS(this.root, graph);
                 res = treeDFS.Search_DFS(fileName, checkBox_all.Checked);
             }
 

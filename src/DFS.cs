@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
-using Microsoft.Msagl.GraphViewerGdi;
 
 namespace DiggingDeep
 {
     internal class DFS
     {
         private TreeNode tree;
-        private Panel panel;
         private Microsoft.Msagl.Drawing.Graph graph;
-        private Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
 
         // constructor
-        public DFS(TreeNode tree, Panel panel, Graph graph, GViewer viewer)
+        public DFS(TreeNode tree, Graph graph)
         {
             this.tree = tree;
-            this.panel = panel;
             this.graph = graph;
-            this.viewer = viewer;
         }
         
         // search using DFS
@@ -61,6 +54,7 @@ namespace DiggingDeep
                             visited.Add(child);
                             path.Add(child);
                             this.graph.FindNode(child.Id).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+                            ColorEdge(current.Id, child.Id, "Red");
                             Search_DFS_rec(FileName, AllOccurence, ref result, ref path, ref visited, ref found);
                             if (found)
                             {
@@ -70,6 +64,7 @@ namespace DiggingDeep
                                 {
                                     pathFound += @"\" + path[i].Name;
                                     this.graph.FindNode(path[i].Id).Attr.FillColor = Microsoft.Msagl.Drawing.Color.Blue;
+                                    ColorEdge(path[i - 1].Id, path[i].Id, "Blue");
                                 }
                                 result.Add(pathFound);
                                 if (AllOccurence)
@@ -91,6 +86,19 @@ namespace DiggingDeep
                     
                 }
                 
+            }
+        }
+
+        public void ColorEdge(string src, string target, string color)
+        {
+            foreach (Edge edge in graph.Edges)
+            {
+                if (edge.Source == src && edge.Target == target)
+                {
+                    if (color == "Blue") { edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Blue; }
+                    else if (color == "Red") { edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Red; }
+                    else { edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Black; }
+                }
             }
         }
     }
