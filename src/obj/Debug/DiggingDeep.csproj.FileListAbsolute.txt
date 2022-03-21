@@ -42,3 +42,14 @@ C:\SEMESTER 4\STRATEGI ALGORITMA\TUBES\2\Tubes_2_Stima\src\obj\Debug\DiggingDeep
 C:\SEMESTER 4\STRATEGI ALGORITMA\TUBES\2\Tubes_2_Stima\src\obj\Debug\DiggingDeep.csproj.CopyComplete
 C:\SEMESTER 4\STRATEGI ALGORITMA\TUBES\2\Tubes_2_Stima\src\obj\Debug\DiggingDeep.exe
 C:\SEMESTER 4\STRATEGI ALGORITMA\TUBES\2\Tubes_2_Stima\src\obj\Debug\DiggingDeep.pdb
+C:\Github\Tubes_2_Stima\src\bin\Debug\DiggingDeep.exe.config
+C:\Github\Tubes_2_Stima\src\bin\Debug\DiggingDeep.exe
+C:\Github\Tubes_2_Stima\src\bin\Debug\DiggingDeep.pdb
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.csproj.AssemblyReference.cache
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.Properties.Resources.resources
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.csproj.GenerateResource.cache
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.csproj.CoreCompileInputs.cache
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.csproj.CopyComplete
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.exe
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.pdb
+C:\Github\Tubes_2_Stima\src\obj\Debug\DiggingDeep.DiggingDeep.resources

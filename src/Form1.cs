@@ -1,37 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
-using Microsoft.Msagl.Drawing;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Msagl.Drawing;
 
 namespace DiggingDeep
 {
-    public partial class Form1 : Form
+    public partial class DiggingDeep : Form
     {
-        public Form1()
+        private TreeNode root;
+
+        // create a graph object
+        public Microsoft.Msagl.Drawing.Graph graph;
+        // create a viewer object
+        public Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
+        public DiggingDeep()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(100, 100);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.DoubleBuffered = true;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+
+            // Init the viewer
+            // bind the graph to the viewer
+            viewer.Graph = graph;
+            // bind viewer engine to panel
+            panelTree.SuspendLayout();
+            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelTree.Controls.Add(viewer);
+            panelTree.ResumeLayout();
         }
 
-        private TreeNode root;
-        // create a graph object
-        Microsoft.Msagl.Drawing.Graph graph;
-        // create a viewer object
-        Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
         private void button_openFolder_Click(object sender, EventArgs e)
         {
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
+
             // create new graph
             graph = new Microsoft.Msagl.Drawing.Graph("graph");
+
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+
                 string selected = dialog.SelectedPath;
                 if (Directory.Exists(selected))
                 {
@@ -40,13 +65,18 @@ namespace DiggingDeep
                 }
                 DrawTree();
             }
+            else
+            {
+                button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+            }
+
         }
 
         private void IterateDirectory(string path, TreeNode node, bool root)
         {
             string pathname = Path.GetFileName(path);
             string[] files = Directory.GetFiles(path);
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 if (File.Exists(file))
                 {
@@ -58,7 +88,7 @@ namespace DiggingDeep
                 }
             }
             string[] dirs = Directory.GetDirectories(path);
-            foreach(string dir in dirs)
+            foreach (string dir in dirs)
             {
                 string dirname = Path.GetFileName(dir);
                 TreeNode child_subdir = node.AddChild(dir, dirname);
@@ -73,20 +103,15 @@ namespace DiggingDeep
         {
             // bind the graph to the viewer
             viewer.Graph = graph;
-            // bind viewer engine to panel
-            panelTree.SuspendLayout();
-            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelTree.Controls.Add(viewer);
-            panelTree.ResumeLayout();
         }
 
         public void ResetGraphColor()
         {
-            foreach(var node in graph.Nodes)
+            foreach (var node in graph.Nodes)
             {
                 node.Attr.FillColor = Microsoft.Msagl.Drawing.Color.White;
             }
-            foreach(var edge in graph.Edges)
+            foreach (var edge in graph.Edges)
             {
                 edge.Attr.Color = Microsoft.Msagl.Drawing.Color.Black;
             }
@@ -94,6 +119,8 @@ namespace DiggingDeep
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
+
             // measure execution time
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -148,6 +175,137 @@ namespace DiggingDeep
 
                 Process.Start("explorer.exe", pathToFile);
             }
+        }
+
+        private void buttonMinimize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal) WindowState = FormWindowState.Minimized;
+            else WindowState = FormWindowState.Normal;
+
+        }
+
+        private void buttonMaximize_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 30, 30));
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+                Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 0, 0));
+            }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void panelHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private GraphicsPath GetPillBtn(RectangleF rec, float rad)
+        {
+            GraphicsPath g = new GraphicsPath();
+            g.StartFigure();
+            g.AddArc(rec.X, rec.Y, rad, rad, 180, 90);
+            g.AddArc(rec.Width - rad, rec.Y, rad, rad, 270, 90);
+            g.AddArc(rec.Width - rad, rec.Height - rad, rad, rad, 0, 90);
+            g.AddArc(rec.X, rec.Height - rad, rad, rad, 90, 90);
+            g.CloseFigure();
+            return g;
+        }
+        private void radBtnBFS_Paint(object sender, PaintEventArgs e)
+        {
+            RectangleF rec = new RectangleF(0, 0, radBtnBFS.Width, radBtnBFS.Height);
+            radBtnBFS.Region = new Region(GetPillBtn(rec, 32));
+        }
+
+        private void radBtnDFS_Paint(object sender, PaintEventArgs e)
+        {
+            RectangleF rec = new RectangleF(0, 0, radBtnDFS.Width, radBtnDFS.Height);
+            radBtnDFS.Region = new Region(GetPillBtn(rec, 32));
+        }
+
+        private void inputFileName_Enter(object sender, EventArgs e)
+        {
+            inputFileName.ForeColor = System.Drawing.Color.Black;
+            if (inputFileName.Text == "e.x. DiggingDeep.txt")
+            {
+                inputFileName.Text = "";
+            }
+        }
+
+        private void inputFileName_Leave(object sender, EventArgs e)
+        {
+            if (inputFileName.Text == "")
+            {
+                inputFileName.ForeColor = System.Drawing.Color.Silver;
+                inputFileName.Text = "e.x. DiggingDeep.txt";
+            }
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+        }
+
+        private void panelTextBox_Paint(object sender, PaintEventArgs e)
+        {
+            RectangleF rec = new RectangleF(0, 0, panelTextBox.Width, panelTextBox.Height);
+            panelTextBox.Region = new Region(GetPillBtn(rec, 32));
+        }
+
+        private void checkBox_all_Paint(object sender, PaintEventArgs e)
+        {
+            RectangleF rec = new RectangleF(0, 0, checkBox_all.Width, checkBox_all.Height);
+            checkBox_all.Region = new Region(GetPillBtn(rec, 32));
+        }
+
+        private void checkBox_all_CheckedChanged(object sender, EventArgs e)
+        {
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+        }
+
+        private void radBtnBFS_CheckedChanged(object sender, EventArgs e)
+        {
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+        }
+
+        private void radBtnDFS_CheckedChanged(object sender, EventArgs e)
+        {
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+        }
+
+        private void panelTextBox_MouseHover(object sender, EventArgs e)
+        {
+            panelTextBox.BackColor = ColorTranslator.FromHtml("#BE9776");
+            inputFileName.BackColor = ColorTranslator.FromHtml("#BE9776");
+        }
+
+        private void panelTextBox_MouseLeave(object sender, EventArgs e)
+        {
+            panelTextBox.BackColor = ColorTranslator.FromHtml("#876445");
+            inputFileName.BackColor = ColorTranslator.FromHtml("#876445");
+        }
+
+        private void inputFileName_MouseHover(object sender, EventArgs e)
+        {
+            panelTextBox.BackColor = ColorTranslator.FromHtml("#BE9776");
+            inputFileName.BackColor = ColorTranslator.FromHtml("#BE9776");
+        }
+
+        private void inputFileName_MouseLeave(object sender, EventArgs e)
+        {
+            panelTextBox.BackColor = ColorTranslator.FromHtml("#876445");
+            inputFileName.BackColor = ColorTranslator.FromHtml("#876445");
         }
     }
 }
