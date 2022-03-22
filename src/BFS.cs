@@ -13,6 +13,11 @@ namespace DiggingDeep
             get { return Path.Last(); }
         }
 
+        public TreeNode Parent
+        {
+            get { return Path[Path.Count - 2]; }
+        }
+
         public BFSNode(TreeNode node, List<TreeNode> path = null)
         {
             Path = path == null ? new List<TreeNode>() : new List<TreeNode>(path);
@@ -22,6 +27,11 @@ namespace DiggingDeep
         public string Pathname()
         {
             return String.Join(@"\", Path);
+        }
+
+        public bool HasParent()
+        {
+            return Path.Count >= 2;
         }
     }
 
@@ -58,6 +68,11 @@ namespace DiggingDeep
                 else
                 {
                     Graph.FindNode(current.Node.Id).Attr.FillColor = Color.Red;
+                    if (current.HasParent())
+                    {
+                        ColorEdge(current.Parent.Id, current.Node.Id, Color.Red);
+                    }
+
                     foreach (TreeNode child in current.Node.Children)
                     {
                         queue.Enqueue(new BFSNode(child, current.Path));
@@ -69,14 +84,31 @@ namespace DiggingDeep
 
             foreach (var bfsNode in found)
             {
-                foreach (var node in bfsNode.Path)
+                var path = bfsNode.Path;
+                for (int i = 0; i < path.Count; i++)
                 {
-                    Graph.FindNode(node.Id).Attr.FillColor = Color.Blue;
+                    Graph.FindNode(path[i].Id).Attr.FillColor = Color.Blue;
+
+                    if (i >= 1)
+                    {
+                        ColorEdge(path[i - 1].Id, path[i].Id, Color.Blue);
+                    }
                 }
                 result.Add(bfsNode.Pathname());
             }
 
             return result;
+        }
+
+        private void ColorEdge(string src, string target, Color color)
+        {
+            foreach (Edge edge in Graph.Edges)
+            {
+                if (edge.Source == src && edge.Target == target)
+                {
+                    edge.Attr.Color = color;
+                }
+            }
         }
     }
 }
