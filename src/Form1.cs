@@ -55,7 +55,7 @@ namespace DiggingDeep
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+                buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
 
                 string selected = dialog.SelectedPath;
                 if (Directory.Exists(selected))
@@ -162,7 +162,7 @@ namespace DiggingDeep
             }
 
             stopwatch.Stop();
-            Controls.Add(labelTime);
+            // Controls.Add(labelTime);
             labelTime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
             DrawTree();
         }
@@ -254,7 +254,7 @@ namespace DiggingDeep
                 inputFileName.ForeColor = System.Drawing.Color.Silver;
                 inputFileName.Text = "e.x. DiggingDeep.txt";
             }
-            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
         }
 
         private void panelTextBox_Paint(object sender, PaintEventArgs e)
@@ -271,17 +271,17 @@ namespace DiggingDeep
 
         private void checkBox_all_CheckedChanged(object sender, EventArgs e)
         {
-            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
         }
 
         private void radBtnBFS_CheckedChanged(object sender, EventArgs e)
         {
-            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
         }
 
         private void radBtnDFS_CheckedChanged(object sender, EventArgs e)
         {
-            button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
         }
 
         private void panelTextBox_MouseHover(object sender, EventArgs e)
