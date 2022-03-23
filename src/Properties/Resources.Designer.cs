@@ -83,6 +83,16 @@ namespace DiggingDeep.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bark_Hover_BG {
+            get {
+                object obj = ResourceManager.GetObject("Bark_Hover_BG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DD_Logo {
             get {
                 object obj = ResourceManager.GetObject("DD_Logo", resourceCulture);

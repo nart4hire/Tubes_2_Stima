@@ -147,5 +147,8 @@
   <ItemGroup>
     <None Include="Resources\Bark_Clicked_BG.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bark_Hover_BG.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

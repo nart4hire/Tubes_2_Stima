@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiggingDeep));
-            this.button_openFolder = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panelTree = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,10 +37,11 @@
             this.radBtnBFS = new System.Windows.Forms.RadioButton();
             this.radBtnDFS = new System.Windows.Forms.RadioButton();
             this.checkBox_all = new System.Windows.Forms.CheckBox();
-            this.buttonSearch = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.button_openFolder = new System.Windows.Forms.Button();
             this.panelTextBox = new System.Windows.Forms.Panel();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelLogo = new System.Windows.Forms.Panel();
@@ -52,25 +52,6 @@
             this.panelTextBox.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button_openFolder
-            // 
-            this.button_openFolder.BackColor = System.Drawing.Color.Transparent;
-            this.button_openFolder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button_openFolder.BackgroundImage")));
-            this.button_openFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_openFolder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(60)))), ((int)(((byte)(41)))));
-            this.button_openFolder.FlatAppearance.BorderSize = 0;
-            this.button_openFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button_openFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button_openFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_openFolder.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_openFolder.Location = new System.Drawing.Point(15, 23);
-            this.button_openFolder.Name = "button_openFolder";
-            this.button_openFolder.Size = new System.Drawing.Size(240, 100);
-            this.button_openFolder.TabIndex = 0;
-            this.button_openFolder.Text = "Choose Directory";
-            this.button_openFolder.UseVisualStyleBackColor = false;
-            this.button_openFolder.Click += new System.EventHandler(this.button_openFolder_Click);
             // 
             // panelTree
             // 
@@ -115,8 +96,8 @@
             this.inputFileName.Text = "e.x. DiggingDeep.txt";
             this.inputFileName.Enter += new System.EventHandler(this.inputFileName_Enter);
             this.inputFileName.Leave += new System.EventHandler(this.inputFileName_Leave);
+            this.inputFileName.MouseEnter += new System.EventHandler(this.inputFileName_MouseEnter);
             this.inputFileName.MouseLeave += new System.EventHandler(this.inputFileName_MouseLeave);
-            this.inputFileName.MouseHover += new System.EventHandler(this.inputFileName_MouseHover);
             // 
             // radBtnBFS
             // 
@@ -183,23 +164,6 @@
             this.checkBox_all.CheckedChanged += new System.EventHandler(this.checkBox_all_CheckedChanged);
             this.checkBox_all.Paint += new System.Windows.Forms.PaintEventHandler(this.checkBox_all_Paint);
             // 
-            // buttonSearch
-            // 
-            this.buttonSearch.BackgroundImage = global::DiggingDeep.Properties.Resources.Bark_BG;
-            this.buttonSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSearch.FlatAppearance.BorderSize = 0;
-            this.buttonSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttonSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearch.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch.Location = new System.Drawing.Point(15, 316);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(240, 100);
-            this.buttonSearch.TabIndex = 11;
-            this.buttonSearch.Text = "Search";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -234,6 +198,48 @@
             this.panel1.Size = new System.Drawing.Size(280, 493);
             this.panel1.TabIndex = 15;
             // 
+            // buttonSearch
+            // 
+            this.buttonSearch.BackgroundImage = global::DiggingDeep.Properties.Resources.Bark_BG;
+            this.buttonSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonSearch.FlatAppearance.BorderSize = 0;
+            this.buttonSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearch.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.Location = new System.Drawing.Point(15, 316);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(240, 100);
+            this.buttonSearch.TabIndex = 11;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            this.buttonSearch.MouseDown += new System.Windows.Forms.MouseEventHandler(this.buttonSearch_MouseDown);
+            this.buttonSearch.MouseEnter += new System.EventHandler(this.buttonSearch_MouseEnter);
+            this.buttonSearch.MouseLeave += new System.EventHandler(this.buttonSearch_MouseLeave);
+            // 
+            // button_openFolder
+            // 
+            this.button_openFolder.BackColor = System.Drawing.Color.Transparent;
+            this.button_openFolder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button_openFolder.BackgroundImage")));
+            this.button_openFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_openFolder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(60)))), ((int)(((byte)(41)))));
+            this.button_openFolder.FlatAppearance.BorderSize = 0;
+            this.button_openFolder.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button_openFolder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button_openFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_openFolder.Font = new System.Drawing.Font("MV Boli", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_openFolder.Location = new System.Drawing.Point(15, 23);
+            this.button_openFolder.Name = "button_openFolder";
+            this.button_openFolder.Size = new System.Drawing.Size(240, 100);
+            this.button_openFolder.TabIndex = 0;
+            this.button_openFolder.Text = "Choose Directory";
+            this.button_openFolder.UseVisualStyleBackColor = false;
+            this.button_openFolder.Click += new System.EventHandler(this.button_openFolder_Click);
+            this.button_openFolder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_openFolder_MouseDown);
+            this.button_openFolder.MouseEnter += new System.EventHandler(this.button_openFolder_MouseEnter);
+            this.button_openFolder.MouseLeave += new System.EventHandler(this.button_openFolder_MouseLeave);
+            // 
             // panelTextBox
             // 
             this.panelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(100)))), ((int)(((byte)(69)))));
@@ -244,8 +250,8 @@
             this.panelTextBox.Size = new System.Drawing.Size(200, 32);
             this.panelTextBox.TabIndex = 0;
             this.panelTextBox.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTextBox_Paint);
+            this.panelTextBox.MouseEnter += new System.EventHandler(this.panelTextBox_MouseEnter);
             this.panelTextBox.MouseLeave += new System.EventHandler(this.panelTextBox_MouseLeave);
-            this.panelTextBox.MouseHover += new System.EventHandler(this.panelTextBox_MouseHover);
             // 
             // panelHeader
             // 

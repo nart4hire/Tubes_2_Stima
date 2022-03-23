@@ -15,6 +15,9 @@ namespace DiggingDeep
     {
         private TreeNode root;
 
+        private bool openFolderClicked = false;
+        private bool searchClicked = false;
+
         // create a graph object
         public Microsoft.Msagl.Drawing.Graph graph;
         // create a viewer object
@@ -47,7 +50,6 @@ namespace DiggingDeep
 
         private void button_openFolder_Click(object sender, EventArgs e)
         {
-            button_openFolder.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
 
             // create new graph
             graph = new Microsoft.Msagl.Drawing.Graph("graph");
@@ -56,6 +58,7 @@ namespace DiggingDeep
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
+                this.searchClicked = false;
 
                 string selected = dialog.SelectedPath;
                 if (Directory.Exists(selected))
@@ -68,6 +71,7 @@ namespace DiggingDeep
             else
             {
                 button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+                this.openFolderClicked = false;
             }
 
         }
@@ -255,6 +259,7 @@ namespace DiggingDeep
                 inputFileName.Text = "e.x. DiggingDeep.txt";
             }
             buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
+            this.searchClicked = false;
         }
 
         private void panelTextBox_Paint(object sender, PaintEventArgs e)
@@ -272,19 +277,22 @@ namespace DiggingDeep
         private void checkBox_all_CheckedChanged(object sender, EventArgs e)
         {
             buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
+            this.searchClicked = false;
         }
 
         private void radBtnBFS_CheckedChanged(object sender, EventArgs e)
         {
             buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
+            this.searchClicked = false;
         }
 
         private void radBtnDFS_CheckedChanged(object sender, EventArgs e)
         {
             buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
+            this.searchClicked = false;
         }
 
-        private void panelTextBox_MouseHover(object sender, EventArgs e)
+        private void panelTextBox_MouseEnter(object sender, EventArgs e)
         {
             panelTextBox.BackColor = ColorTranslator.FromHtml("#BE9776");
             inputFileName.BackColor = ColorTranslator.FromHtml("#BE9776");
@@ -296,7 +304,7 @@ namespace DiggingDeep
             inputFileName.BackColor = ColorTranslator.FromHtml("#876445");
         }
 
-        private void inputFileName_MouseHover(object sender, EventArgs e)
+        private void inputFileName_MouseEnter(object sender, EventArgs e)
         {
             panelTextBox.BackColor = ColorTranslator.FromHtml("#BE9776");
             inputFileName.BackColor = ColorTranslator.FromHtml("#BE9776");
@@ -306,6 +314,53 @@ namespace DiggingDeep
         {
             panelTextBox.BackColor = ColorTranslator.FromHtml("#876445");
             inputFileName.BackColor = ColorTranslator.FromHtml("#876445");
+        }
+
+        private void button_openFolder_MouseDown(object sender, MouseEventArgs e)
+        {
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
+            this.openFolderClicked = true;
+        }
+
+        private void button_openFolder_MouseEnter(object sender, EventArgs e)
+        {
+            button_openFolder.BackgroundImage = Properties.Resources.Bark_Hover_BG;
+        }
+
+        private void button_openFolder_MouseLeave(object sender, EventArgs e)
+        {
+            if (!this.openFolderClicked)
+            {
+                button_openFolder.BackgroundImage = Properties.Resources.Bark_BG;
+            }
+            else
+            {
+                button_openFolder.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
+            }
+        }
+
+        private void buttonSearch_MouseDown(object sender, MouseEventArgs e)
+        {
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
+            this.searchClicked = true;
+        }
+
+        private void buttonSearch_MouseEnter(object sender, EventArgs e)
+        {
+            buttonSearch.BackgroundImage = Properties.Resources.Bark_Hover_BG;
+        }
+
+        private void buttonSearch_MouseLeave(object sender, EventArgs e)
+        {
+            if (!this.searchClicked)
+            {
+                buttonSearch.BackgroundImage = Properties.Resources.Bark_BG;
+            }
+            else
+            {
+                buttonSearch.BackgroundImage = Properties.Resources.Bark_Clicked_BG;
+            }
+
         }
     }
 }
