@@ -67,7 +67,7 @@ namespace DiggingDeep
                 }
                 else
                 {
-                    Graph.FindNode(current.Node.Id).Attr.FillColor = Color.Red;
+                    Graph.FindNode(current.Node.Id).Attr.Color = Color.Red;
                     if (current.HasParent())
                     {
                         ColorEdge(current.Parent.Id, current.Node.Id, Color.Red);
@@ -87,7 +87,7 @@ namespace DiggingDeep
                 var path = bfsNode.Path;
                 for (int i = 0; i < path.Count; i++)
                 {
-                    Graph.FindNode(path[i].Id).Attr.FillColor = Color.Blue;
+                    Graph.FindNode(path[i].Id).Attr.Color = Color.Blue;
 
                     if (i >= 1)
                     {

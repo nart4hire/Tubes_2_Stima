@@ -113,7 +113,7 @@ namespace DiggingDeep
         {
             foreach (var node in graph.Nodes)
             {
-                node.Attr.FillColor = Microsoft.Msagl.Drawing.Color.White;
+                node.Attr.Color = Microsoft.Msagl.Drawing.Color.Black;
             }
             foreach (var edge in graph.Edges)
             {
