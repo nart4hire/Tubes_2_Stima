@@ -133,4 +133,16 @@
   <data name="Bark_Hover_BG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bark_Hover_BG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="shovel_click" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shovel_click.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shovel_click1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shovel_click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shovel_neutral" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shovel_neutral.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="shovel_neutral1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shovel_neutral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

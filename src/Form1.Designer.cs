@@ -39,7 +39,7 @@
             this.checkBox_all = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelMenu = new System.Windows.Forms.Panel();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.button_openFolder = new System.Windows.Forms.Button();
             this.panelTextBox = new System.Windows.Forms.Panel();
@@ -48,7 +48,7 @@
             this.buttonMaximize = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonMinimize = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.panelMenu.SuspendLayout();
             this.panelTextBox.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.SuspendLayout();
@@ -181,22 +181,22 @@
             this.labelTime.Size = new System.Drawing.Size(0, 17);
             this.labelTime.TabIndex = 13;
             // 
-            // panel1
+            // panelMenu
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.labelTime);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.buttonSearch);
-            this.panel1.Controls.Add(this.checkBox_all);
-            this.panel1.Controls.Add(this.radBtnDFS);
-            this.panel1.Controls.Add(this.radBtnBFS);
-            this.panel1.Controls.Add(this.button_openFolder);
-            this.panel1.Controls.Add(this.panelTextBox);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 180);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(280, 493);
-            this.panel1.TabIndex = 15;
+            this.panelMenu.BackColor = System.Drawing.Color.Transparent;
+            this.panelMenu.Controls.Add(this.labelTime);
+            this.panelMenu.Controls.Add(this.label5);
+            this.panelMenu.Controls.Add(this.buttonSearch);
+            this.panelMenu.Controls.Add(this.checkBox_all);
+            this.panelMenu.Controls.Add(this.radBtnDFS);
+            this.panelMenu.Controls.Add(this.radBtnBFS);
+            this.panelMenu.Controls.Add(this.button_openFolder);
+            this.panelMenu.Controls.Add(this.panelTextBox);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(0, 180);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(280, 493);
+            this.panelMenu.TabIndex = 15;
             // 
             // buttonSearch
             // 
@@ -337,13 +337,13 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(60)))), ((int)(((byte)(41)))));
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.panelTree);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.linkPath);
             this.Controls.Add(this.label2);
             this.Name = "DiggingDeep";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
             this.panelTextBox.ResumeLayout(false);
             this.panelTextBox.PerformLayout();
             this.panelHeader.ResumeLayout(false);
@@ -368,7 +368,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button buttonMinimize;
         private System.Windows.Forms.Button buttonMaximize;
         private System.Windows.Forms.Button buttonExit;

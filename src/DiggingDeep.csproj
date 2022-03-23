@@ -150,5 +150,11 @@
   <ItemGroup>
     <None Include="Resources\Bark_Hover_BG.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shovel_click.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shovel_neutral.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,6 +18,9 @@ namespace DiggingDeep
         private bool openFolderClicked = false;
         private bool searchClicked = false;
 
+        private Cursor neutral = new Cursor(Properties.Resources.shovel_neutral1.GetHicon());
+        private Cursor click = new Cursor(Properties.Resources.shovel_click1.GetHicon());
+
         // create a graph object
         public Microsoft.Msagl.Drawing.Graph graph;
         // create a viewer object
@@ -29,6 +32,12 @@ namespace DiggingDeep
         public DiggingDeep()
         {
             InitializeComponent();
+            this.Cursor = neutral;
+            this.panelHeader.Cursor = neutral;
+            this.panelLogo.Cursor = neutral;
+            this.panelMenu.Cursor = neutral;
+            this.panelTree.Cursor = neutral;
+
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(100, 100);
             this.FormBorderStyle = FormBorderStyle.None;
@@ -44,6 +53,9 @@ namespace DiggingDeep
             // bind viewer engine to panel
             panelTree.SuspendLayout();
             viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            viewer.Cursor = neutral;
+            viewer.ToolBarIsVisible = false;
+            viewer.OutsideAreaBrush = Brushes.Transparent;
             panelTree.Controls.Add(viewer);
             panelTree.ResumeLayout();
         }
@@ -53,6 +65,7 @@ namespace DiggingDeep
 
             // create new graph
             graph = new Microsoft.Msagl.Drawing.Graph("graph");
+            // graph.Attr.BackgroundColor = Microsoft.Msagl.Drawing.Color.Transparent;
 
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
