@@ -38,12 +38,11 @@ namespace DiggingDeep
     internal class BFS
     {
         private readonly TreeNode Tree;
-        private readonly Graph Graph;
+        public readonly Graph Graph = new Graph();
 
-        public BFS(TreeNode tree, Graph graph)
+        public BFS(TreeNode tree)
         {
             Tree = tree;
-            Graph = graph;
         }
 
         public HashSet<string> Search(string filename, bool isFindAll)
@@ -56,6 +55,7 @@ namespace DiggingDeep
             while (queue.Count > 0)
             {
                 BFSNode current = queue.Dequeue();
+                Node graphNode = Graph.AddNode(current.Node.Id);
 
                 if (current.Node.Name == filename)
                 {
@@ -67,7 +67,7 @@ namespace DiggingDeep
                 }
                 else
                 {
-                    Graph.FindNode(current.Node.Id).Attr.Color = Color.Red;
+                    graphNode.Attr.Color = Color.Red;
                     if (current.HasParent())
                     {
                         ColorEdge(current.Parent.Id, current.Node.Id, Color.Red);
@@ -75,6 +75,8 @@ namespace DiggingDeep
 
                     foreach (TreeNode child in current.Node.Children)
                     {
+                        Graph.AddEdge(current.Node.Id, child.Id);
+                        Graph.FindNode(child.Id).LabelText = child.Name;
                         queue.Enqueue(new BFSNode(child, current.Path));
                     }
                 }
@@ -100,11 +102,11 @@ namespace DiggingDeep
             return result;
         }
 
-        private void ColorEdge(string src, string target, Color color)
+        private void ColorEdge(string source, string target, Color color)
         {
-            foreach (Edge edge in Graph.Edges)
+            foreach (Edge edge in Graph.FindNode(target).InEdges)
             {
-                if (edge.Source == src && edge.Target == target)
+                if (edge.Source == source)
                 {
                     edge.Attr.Color = color;
                 }
