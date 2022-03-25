@@ -18,7 +18,7 @@ dari daun-daun yang bersesuaian dengan hasil pencarian. Path tersebut memiliki h
 menuju folder parent dari file yang dicari, agar file langsung dapat diakses melalui
 file explorer.
 
-![Tampilan aplikasi Digging Deep](docs/app.png)
+![Tampilan aplikasi Digging Deep](doc/app.png)
 
 ## Install dan Run
 
@@ -31,14 +31,14 @@ Instalasi program ke operating system dapat dilakukan melalui file `setup.exe` a
 `setup.msi` pada direktori `bin/Setup`. Cukup jalankan file tersebut dan ikuti setup
 wizard-nya.
 
-![Memilih file setup](docs/setup.exe.png)
-![Installation wizard](docs/install.png)
+![Memilih file setup](doc/setup.exe.png)
+![Installation wizard](doc/install.png)
 
 ### Uninstall
 
 Untuk meng-uninstall, lakukan melalui operating system.
 
-![Uninstall melalui Windows Settings](docs/uninstall.png)
+![Uninstall melalui Windows Settings](doc/uninstall.png)
 
 ### Menjalankan tanpa install
 
