@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Microsoft.Msagl.Drawing;
 
 namespace DiggingDeep
@@ -15,7 +17,7 @@ namespace DiggingDeep
             this.tree = tree;
             this.graph = graph;
         }
-
+        
         // search using DFS
         public HashSet<string> Search_DFS(string FileName, bool AllOccurence)
         {
@@ -30,14 +32,18 @@ namespace DiggingDeep
 
             return result;
         }
+
+        // fungsi rekursif
         public void Search_DFS_rec(string FileName, bool AllOccurence, ref HashSet<string> result, ref List<TreeNode> path, ref List<TreeNode> visited, ref bool found)
         {
+            // jika nama file adalah nama file yang dicari
             if (path.Last().Name == FileName)
             {
                 found = true;
             }
             else
             {
+                // jika node adalah daun
                 if (path.Last().Children.Count == 0)
                 {
                     path.Remove(path.Last());
@@ -45,15 +51,20 @@ namespace DiggingDeep
                 else
                 {
                     TreeNode current = path.Last();
+                    // loop untuk setiap child
                     foreach (TreeNode child in current.Children)
                     {
+                        // periksa node jika belum dikunjungi
                         if (!visited.Contains(child))
-                        {
+                        {                       
                             visited.Add(child);
                             path.Add(child);
+                            // tandai node dan edge yang telah dikunjungi dengan warna merah
                             this.graph.FindNode(child.Id).Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
                             ColorEdge(current.Id, child.Id, "Red");
-                            Search_DFS_rec(FileName, AllOccurence, ref result, ref path, ref visited, ref found);
+                            Search_DFS_rec(FileName, AllOccurence, ref result, ref path, ref visited, ref found); // rekursif
+
+                            // jika file ditemukan, catat path dan tandai node dan edge dengan warna biru
                             if (found)
                             {
                                 string pathFound = path.First().Name;
@@ -81,9 +92,9 @@ namespace DiggingDeep
                             }
                         }
                     }
-
+                    
                 }
-
+                
             }
         }
 

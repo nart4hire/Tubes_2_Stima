@@ -19,7 +19,6 @@ C:\Github\Tubes_2_Stima\src\Application\bin\Release\AutomaticGraphLayout.dll
 C:\Github\Tubes_2_Stima\src\Application\bin\Release\AutomaticGraphLayout.Drawing.dll
 C:\Github\Tubes_2_Stima\src\Application\bin\Release\Microsoft.Msagl.GraphViewerGdi.dll
 C:\Github\Tubes_2_Stima\src\Application\bin\Release\Microsoft.Msagl.WpfGraphControl.dll
-C:\Github\Tubes_2_Stima\src\Application\obj\Release\DiggingDeep.csproj.AssemblyReference.cache
 C:\Github\Tubes_2_Stima\src\Application\obj\Release\DiggingDeep.DiggingDeep.resources
 C:\Github\Tubes_2_Stima\src\Application\obj\Release\DiggingDeep.Properties.Resources.resources
 C:\Github\Tubes_2_Stima\src\Application\obj\Release\DiggingDeep.csproj.GenerateResource.cache
