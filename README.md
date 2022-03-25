@@ -28,11 +28,15 @@ sistem operasi Windows.
 ### Install
 
 Instalasi program ke operating system dapat dilakukan melalui file `setup.exe` atau
-`setup.msi` pada direktori `bin/Setup`. Cukup jalankan file tersebut dan ikuti setup
-wizard-nya.
+`setup.msi` pada direktori `bin/Setup`.
 
 ![Memilih file setup](doc/setup.exe.png)
+
+Cukup jalankan file tersebut dan ikuti setup wizard-nya.
+
 ![Installation wizard](doc/install.png)
+
+Kemudian program dapat dijalankan melalui desktop icon atau Windows toolbar.
 
 ### Uninstall
 
